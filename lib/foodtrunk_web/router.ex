@@ -24,11 +24,9 @@ defmodule FoodtrunkWeb.Router do
   scope "/api" do
     pipe_through :api
 
-    forward "/graphiql", Absinthe.Plug.GraphiQL,
-      schema: FoodtrunkWeb.Schema
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: FoodtrunkWeb.Schema
 
-    forward "/", Absinthe.Plug,
-      schema: FoodtrunkWeb.Schema
+    forward "/", Absinthe.Plug, schema: FoodtrunkWeb.Schema
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
