@@ -8,8 +8,8 @@ defmodule InitialSeed do
   defp insert_food_truck(values) do
     [_,applicant,facilityType,_,locationDescription,address,_,_,_,_,_,foodItems,_,_,latitude,longitude,schedule,dayshours | _] = values
 
-    Hello.Repo.transaction(fn ->
-      Hello.FoodTrucks.Create.call(%{
+    Foodtrunk.Repo.transaction(fn ->
+      Foodtrunk.FoodTrucks.Create.call(%{
         name: applicant,
         type: facilityType,
         location: locationDescription,
@@ -34,7 +34,7 @@ defmodule InitialSeed do
   end
 
   def run() do
-    file_name = Path.join([:code.priv_dir(:hello), "Mobile_Food_Facility_Permit.csv"])
+    file_name = Path.join([:code.priv_dir(:foodtrunk), "Mobile_Food_Facility_Permit.csv"])
     import_from_csv(file_name)
   end
 end
