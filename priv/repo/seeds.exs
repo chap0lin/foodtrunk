@@ -1,12 +1,33 @@
 defmodule InitialSeed do
   defp parse(file_path) do
     File.stream!(file_path)
-    |> Stream.drop(1) # skipping first row
+    # skipping first row
+    |> Stream.drop(1)
     |> Stream.map(&String.split(&1, ","))
   end
+
   # locationid,Applicant,FacilityType,cnn,LocationDescription,Address,blocklot,block,lot,permit,Status,FoodItems,X,Y,Latitude,Longitude,Schedule,dayshours,NOISent,Approved,Received,PriorPermit,ExpirationDate,Location,Fire Prevention Districts,Police Districts,Supervisor Districts,Zip Codes,Neighborhoods (old)
   defp insert_food_truck(values) do
-    [_,applicant,facilityType,_,locationDescription,address,_,_,_,_,_,foodItems,_,_,latitude,longitude,schedule,dayshours | _] = values
+    [
+      _,
+      applicant,
+      facilityType,
+      _,
+      locationDescription,
+      address,
+      _,
+      _,
+      _,
+      _,
+      _,
+      foodItems,
+      _,
+      _,
+      latitude,
+      longitude,
+      schedule,
+      dayshours | _
+    ] = values
 
     Foodtrunk.Repo.transaction(fn ->
       Foodtrunk.FoodTrucks.Create.call(%{
@@ -25,7 +46,6 @@ defmodule InitialSeed do
         {:error, changeset} -> IO.puts("Error creating record: #{inspect(changeset.errors)}")
       end
     end)
-
   end
 
   defp import_from_csv(csv_file) do
