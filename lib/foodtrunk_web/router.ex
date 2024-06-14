@@ -21,9 +21,15 @@ defmodule FoodtrunkWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", FoodtrunkWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", FoodtrunkWeb do
+    pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: FoodtrunkWeb.Schema
+
+    forward "/", Absinthe.Plug,
+      schema: FoodtrunkWeb.Schema
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:foodtrunk, :dev_routes) do
