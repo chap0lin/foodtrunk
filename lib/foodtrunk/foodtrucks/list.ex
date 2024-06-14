@@ -3,9 +3,11 @@ defmodule Foodtrunk.FoodTrucks.List do
   alias Foodtrunk.{FoodTruck, Repo}
 
   def call() do
-    result = FoodTruck
-    |> where(is_nil(:deleted_at))
-    |> Repo.all()
+    result =
+      FoodTruck
+      |> where([ft], is_nil(ft.deleted_at))
+      |> Repo.all()
+
     {:ok, result}
   end
 end
