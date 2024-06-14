@@ -11,10 +11,12 @@ defmodule Foodtrunk.Schema.Types.Root do
 
       resolve &FoodTruckResolver.get/2
     end
+
     field :list_all_food_trucks, type: list_of(:food_truck) do
       resolve &FoodTruckResolver.list/2
     end
   end
+
   object :root_mutation do
     field :create_food_truck, type: :food_truck do
       arg :input, non_null(:create_food_truck_input)
