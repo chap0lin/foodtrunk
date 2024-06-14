@@ -21,7 +21,7 @@ defmodule FoodtrunkWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", FoodtrunkWeb do
+  scope "/api" do
     pipe_through :api
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
