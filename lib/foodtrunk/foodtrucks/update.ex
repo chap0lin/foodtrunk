@@ -7,7 +7,9 @@ defmodule Foodtrunk.FoodTrucks.Update do
     |> where([ft], is_nil(ft.deleted_at))
     |> Repo.get(params.id)
     |> case do
-      nil -> {:error, "FoodTruck not found"}
+      nil ->
+        {:error, "FoodTruck not found"}
+
       foodtruck ->
         changeset = FoodTruck.changeset(foodtruck, params)
         Repo.update(changeset)
